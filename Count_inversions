@@ -1,0 +1,60 @@
+static long count;
+    public static long getInversions(long arr[], int n) {
+        // Write your code here.
+        count = 0;
+        mergeSort(arr,0,n-1);
+//         printArray(arr);
+        return count;
+    }
+    private static void printArray(long arr[]) {
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+		System.out.println();
+	}
+    private static void mergeSort(long arr[],int s,int e){
+        if(s>=e){
+            return;
+        }
+        int mid = (s+e)/2;
+        mergeSort(arr,s,mid);
+        mergeSort(arr,mid+1,e);
+        merge(arr,s,e);
+    }
+    
+    private static void merge(long arr[],int s,int e){
+        if(s>=e){
+            return ;
+        }
+        int mid = (s+e)/2;
+        long temp[] = new long[e-s+1];
+        int k =0;
+        int i = s;
+        int j = mid+1;
+        while(i<=mid && j<=e){
+            if (arr[i] <= arr[j]) {
+				temp[k] = arr[i];
+				i++;
+			} else {
+                count += mid-i+1;
+				temp[k] = arr[j];
+				j++;
+			}
+			k++;
+        }
+        while (i <= mid) {
+			temp[k] = arr[i];
+			i++;
+			k++;
+		}
+		while (j <= e) {
+			temp[k] = arr[j];
+			j++;
+			k++;
+		}
+        
+        for (int x = 0; x < temp.length; x++) {
+			arr[x+s] = temp[x];
+		}
+        
+    }
