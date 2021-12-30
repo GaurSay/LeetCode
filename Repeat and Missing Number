@@ -1,0 +1,24 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public ArrayList<Integer> repeatedNumber(final List<Integer> A) {
+        long diff=0;
+    long squareDiff=0;
+    int len = A.size();
+    
+    for(int i=1; i<=len; i++){
+        
+        long curr = A.get(i-1);
+        diff += curr - i;
+        squareDiff += ( curr-i )*(curr+i);
+    }
+    long sum = squareDiff/diff;
+    
+    long repeated = (diff+sum)/2;
+    long missing = (sum-diff)/2;
+    ArrayList<Integer> res = new ArrayList<Integer>();
+    res.add( (int)repeated );
+    res.add( (int)missing );
+    
+    return res;
+    }
+}
