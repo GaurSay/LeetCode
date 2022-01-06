@@ -12,42 +12,52 @@ class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         return merge(list1,list2);
     }
-    private static ListNode merge(ListNode list1, ListNode list2){
-        if(list1==null){
-            return list2;
+    private static ListNode merge(ListNode l1, ListNode l2){
+        if(l1==null){
+            return l2;
         }
-        if(list2==null){
-            return list1;
+        if(l2==null){
+            return l1;
         }
-        ListNode anshead = null;
-        if(list1.val <= list2.val){
-            anshead = list1;
-            list1= list1.next;
+        ListNode mergeHead;
+        if(l1.val < l2.val){
+            mergeHead = l1;
+            mergeHead.next = merge(l1.next, l2);
         }
         else{
-            anshead = list2;
-            list2=list2.next;
+            mergeHead = l2;
+            mergeHead.next = merge(l1, l2.next);
         }
-        ListNode curr = anshead;
-        while(list1!=null && list2!=null){
-            if(list1.val <= list2.val){
-                curr.next = list1;
-                list1= list1.next;
+        return mergeHead;
+//         ListNode anshead = null;
+//         if(list1.val <= list2.val){
+//             anshead = list1;
+//             list1= list1.next;
+//         }
+//         else{
+//             anshead = list2;
+//             list2=list2.next;
+//         }
+//         ListNode curr = anshead;
+//         while(list1!=null && list2!=null){
+//             if(list1.val <= list2.val){
+//                 curr.next = list1;
+//                 list1= list1.next;
                 
-             }
-            else{
-                curr.next = list2;
-                list2=list2.next;
-            }
-            curr = curr.next;
-        }
-        if(list1!=null){
-            curr.next = list1;
-        }
-        if(list2!=null){
-             curr.next = list2;
-        }
+//              }
+//             else{
+//                 curr.next = list2;
+//                 list2=list2.next;
+//             }
+//             curr = curr.next;
+//         }
+//         if(list1!=null){
+//             curr.next = list1;
+//         }
+//         if(list2!=null){
+//              curr.next = list2;
+//         }
         
-        return anshead;
+//         return anshead;
     }
 }
