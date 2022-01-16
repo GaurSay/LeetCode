@@ -1,29 +1,23 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] arr, int target) {
-         // Write your code here.
         List<List<Integer>> ans = new ArrayList<>();
-        getsubset(arr,0,target,new ArrayList<>(),ans);
+        getsubsets(arr,0,target,new ArrayList<>(),ans);
         return ans;
     }
-    
-    private static void getsubset(int arr[],int index,int          sum,ArrayList<Integer> ds,List<List<Integer>> ans){
+    private static void getsubsets(int arr[],int index,int target,ArrayList<Integer> output,List<List<Integer>> ans){
         if(index == arr.length){
-            if(sum == 0){
-            	ans.add(new ArrayList<>(ds));
-        	}
+            if(target==0){
+                ans.add(new ArrayList<>(output));
+            }
             return;
         }
- 
-        //adding curr index element - picking ( we can pick same again)
-        if(arr[index] <= sum){
-            ds.add(arr[index]);
-        	getsubset(arr,index,sum-arr[index],ds,ans);
-        	ds.remove(ds.size()-1);
+        
+        if(arr[index] <= target){
+            output.add(arr[index]);
+            getsubsets(arr,index,target-arr[index],output,ans);
+            output.remove(output.size()-1);
         }
         
-        // without curr index
-        getsubset(arr,index+1,sum,ds,ans);
-        
-        
+        getsubsets(arr,index+1,target,output,ans);
     }
 }
