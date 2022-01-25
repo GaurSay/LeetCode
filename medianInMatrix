@@ -1,0 +1,43 @@
+public class Solution {
+    public int findMedian(ArrayList<ArrayList<Integer>> A) {
+        int low = 1;
+        int high = (int)1e9;
+        int n = A.size();
+        int m = A.get(0).size();
+        while(low<=high){
+            int mid  = (low+high) >> 1;
+            int count = getSmaller(A,mid);
+            if(count <= (n*m)/2){
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+            
+        }
+        return low;
+        
+    }
+
+    private static int getSmaller(ArrayList<ArrayList<Integer>> A,int x){
+        int count =0;
+        for(int i=0;i<A.size();i++){
+            ArrayList<Integer> list = A.get(i);
+            int low = 0;
+            int high = list.size()-1;
+            while(low<=high){
+                int mid = (low+ high)/2;
+                if(list.get(mid) <= x){
+                    low = mid+1;
+                }
+                else{
+                    high = mid-1;
+                }
+                
+            } 
+            // System.out.println(low);
+            count = count + low;        
+        }
+        return count;
+    }
+}
