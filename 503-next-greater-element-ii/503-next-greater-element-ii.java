@@ -5,7 +5,7 @@ class Solution {
         int ans[] = new int[nums.length];
     
         for(int i=n-2;i>=0;i--){
-            while(st.size() > 0 && st.peek()<nums[i]){
+            while(st.size() > 0 && st.peek()<=nums[i]){
                 st.pop();
             }
             st.push(nums[i]);
