@@ -3,9 +3,9 @@ class Solution {
         //element - next greater element
         HashMap<Integer,Integer> hm = new HashMap<>();
         Stack<Integer> st = new Stack<>();
-        int n = nums2.length-1;
-        hm.put(nums2[n],-1);
-        st.push(nums2[n]);
+        int n = nums2.length;
+        // hm.put(nums2[n],-1);
+        // st.push(nums2[n]);
         
         for(int i=n-1;i>=0;i--){
             while(!st.isEmpty() && st.peek()<=nums2[i]){
