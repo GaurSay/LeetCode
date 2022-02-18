@@ -31,7 +31,7 @@ class Solution {
             int last =0;
             for(int i=0;i<n;i++){
                 Pair curr = q.poll();       
-                int currid = curr.num;
+                int currid = curr.num-min;
                 
                 if(i==0) first = currid;
                 if(i==n-1) last = currid;
