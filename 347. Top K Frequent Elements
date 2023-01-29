@@ -1,0 +1,45 @@
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        // nlog K - priority queue 
+
+        int ans[]= new int[k];
+
+        //O(n) - Bucket sort
+        Map<Integer,Integer> hm = new HashMap<>();
+
+        for(int n : nums){
+            hm.put(n,hm.getOrDefault(n,0)+1);
+        } 
+        // List<Integer>[] bucket= new ArrayList<>();
+        List<List<Integer>> bucket= new ArrayList<>(nums.length+1);
+        for(int i=0;i<nums.length+1;i++){
+            bucket.add(null);
+        }
+
+        for(int i: hm.keySet()){
+            int freq = hm.get(i);
+            if(bucket.get(freq) != null){
+                bucket.get(freq).add(i);
+            }
+            else{
+                List<Integer> list= new ArrayList<>();
+                list.add(i);
+                bucket.set(freq,list);
+            }
+        }
+        int c =0;
+        for(int i = bucket.size()-1;i>=0 && c<k;i--){
+            if(bucket.get(i)!=null){
+                List<Integer> list = bucket.get(i);
+                for(Integer x : list){
+                    ans[c] = (int)x;
+                    c++;
+                    if(c==k){
+                        break;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+}
