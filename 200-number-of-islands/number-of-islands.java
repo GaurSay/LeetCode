@@ -8,7 +8,7 @@ class Solution {
             for(int j=0;j<n;j++){
                 if(grid[i][j] == '1' && visited[i][j] == 0){
                     islands++;
-                    DFS(i,j,m,n,visited,grid);
+                    dfs(grid,i,j);
                 }
             }
         }
@@ -16,47 +16,15 @@ class Solution {
         
     }
 
-    private void DFS(int i,int j,int m,int n,int visited[][],char grid[][]){
-        visited[i][j]=1;
-        Queue<Pair> q= new LinkedList<>();
-        q.add(new Pair(i,j));
-
-        while(!q.isEmpty()){
-            Pair p = q.poll();
-            int r = p.f;
-            int c = p.s;
-            int nrow = r;
-            int ncol = c-1;
-            if(nrow>=0 && nrow<m && ncol>=0 && ncol<n && grid[nrow][ncol]=='1' && visited[nrow][ncol]==0){
-                visited[nrow][ncol] = 1;
-                q.add(new Pair(nrow,ncol));
-            }
-            nrow = r;
-            ncol = c+1;
-            if(nrow>=0 && nrow<m && ncol>=0 && ncol<n && grid[nrow][ncol]=='1' && visited[nrow][ncol]==0){
-                visited[nrow][ncol] = 1;
-                q.add(new Pair(nrow,ncol));
-            }
-            nrow = r-1;
-            ncol = c;
-            if(nrow>=0 && nrow<m && ncol>=0 && ncol<n && grid[nrow][ncol]=='1' && visited[nrow][ncol]==0){
-                visited[nrow][ncol] = 1;
-                q.add(new Pair(nrow,ncol));
-            }
-            nrow = r+1;
-            ncol = c;
-            if(nrow>=0 && nrow<m && ncol>=0 && ncol<n && grid[nrow][ncol]=='1' && visited[nrow][ncol]==0){
-                visited[nrow][ncol] = 1;
-                q.add(new Pair(nrow,ncol));
-            }
+    private void dfs(char[][] grid, int i, int j) {
+        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] != '1') {
+            return;
         }
-    }
-}
-class Pair{
-    int f;
-    int s;
-    public Pair(int f,int s){
-        this.f=f;
-        this.s=s;
+        
+        grid[i][j] = '0'; // mark as visited
+        dfs(grid, i + 1, j); // down
+        dfs(grid, i - 1, j); // up
+        dfs(grid, i, j + 1); // right
+        dfs(grid, i, j - 1); // left
     }
 }
