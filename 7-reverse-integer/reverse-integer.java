@@ -1,20 +1,22 @@
 class Solution {
     public int reverse(int x) {
-        boolean negative = false;
-       if (x < 0) {
-        x = -x;
-        negative = true;
-    }
-    int num =0;
-    while(x!=0){  
-        int a=x%10; 
-        // Check if the next operation is going to cause an overflow
-        // and return 0 if it does
-        if (num > (Integer.MAX_VALUE-a)/10) return 0;
-        num=num*10+a;  
-        x=x/10;  
-    }  
-    return negative ? -num : num;
+        int num = Math.abs(x);  // Original number ka absolute value nikala
+        
+        int rev = 0;  // Reversed number
+        
+        while (num != 0) {
+            int ld = num % 10;  // Last digit nikala
+            
+            // Overflow check
+            if (rev > (Integer.MAX_VALUE - ld) / 10) {
+                return 0;  // Agar overflow hua, toh 0 return kardo
+            }
+            
+            rev = rev * 10 + ld;  // Reverse mein digit ko add kiya
+            num = num / 10;  // Last digit hata diya, next iteration ke liye
+        }
+        
+        return (x < 0) ? (-rev) : rev; 
         
     }
 }
