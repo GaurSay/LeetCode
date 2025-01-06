@@ -1,23 +1,19 @@
 class Solution {
-    public boolean searchMatrix(int[][] matrix, int target) {
-        if(matrix == null || matrix.length < 1 || matrix[0].length <1) {
-            return false;
-        }
-        int i = 0;
-        int j = matrix[0].length-1;
-        int m = matrix.length;
-        int n = matrix[0].length-1;
+    public boolean searchMatrix(int[][] arr, int target) {
+        int n = arr.length;
+        int m = arr[0].length;
+        int r = 0;
+        int c = m-1;
 
-        while(i<m && j>=0){
-
-            if(matrix[i][j] == target){
+        while(r<n && c>=0){
+            if(arr[r][c] == target){
                 return true;
             }
-            else if(matrix[i][j] > target){
-                j--;
+            if(arr[r][c] < target){
+                r++;
             }
             else{
-                i++;
+                c--;
             }
         }
         return false;
