@@ -8,7 +8,7 @@ class MyHashMap {
     }
 
      private int hash(int key) {
-        return key % 1000;
+        return Integer.hashCode(key) % 1000;
     }
     
     public void put(int key, int value) {
