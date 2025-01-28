@@ -10,7 +10,10 @@ class Solution {
         int ans = Integer.MAX_VALUE;
         while(l<=h){
             int mid = (l+h)>>1;
-            System.out.println(mid);
+            if (nums[l] <= nums[h]) {
+                ans = Math.min(ans, nums[l]);
+                break;
+            }
             if(nums[l]<=nums[mid]){
                 ans = Math.min(ans,nums[l]);
                 l = mid+1;
