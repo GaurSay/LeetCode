@@ -1,0 +1,29 @@
+l=ans_min =1;
+h=ans_max =arr[n-1]-arr[0];
+
+binary search
+// check if possible with mid distance
+if(check(mid,arr,K){
+//maximise
+ans = mid;
+  l=mid+1;
+} else{
+  h = mid-1;
+}
+
+check(int d,int arr[],int k){
+  cowsPlaced =1;
+  lastPlaced =arr[0];
+  for(int i=1;i<n;i++){
+   if(arr[i]-lastPlaced >=d){
+      cowsPlaced++;
+      lastPlaced =arr[i];
+   }
+   if(cowsPlaced == K){
+    return true;
+  }
+
+ }
+return false;
+
+}
