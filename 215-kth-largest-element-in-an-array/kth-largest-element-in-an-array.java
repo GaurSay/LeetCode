@@ -13,6 +13,6 @@ class Solution {
             }
            }
         }
-        return pq.poll();
+        return pq.peek();
     }
 }
