@@ -1,0 +1,63 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public int[][] verticalOrderTraversal(TreeNode A) {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        hm = new HashMap<>();
+
+        min = Integer.MAX_VALUE;
+        max = Integer.MIN_VALUE;
+        
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(0,A));
+
+        while(!q.isEmpty()){
+            Pair p = q.poll();
+            TreeNode curr = p.node;
+            int vd = p.vd;
+            min = Math.min(min,vd);
+            max = Math.max(max,vd);
+            if(hm.containsKey(vd)){
+                ArrayList<Integer> list = hm.get(vd);
+                list.add(curr.val);
+                hm.put(vd,list);
+            }
+            else{
+                ArrayList<Integer> list = new ArrayList<>();
+                list.add(curr.val);
+                hm.put(vd,list);
+            }
+            
+            if(curr.left!=null){
+                q.add(new Pair(vd-1,curr.left));
+            }
+            if(curr.right!=null){
+                q.add(new Pair(vd+1,curr.right));
+            }
+        }
+
+         for(int i =min ;i<=max ;i++){
+            ans.add(hm.get(i));
+        }
+        return ans;
+    }
+}
+class Pair{
+        int vd;
+        TreeNode node;
+        Pair(int vd,TreeNode node){
+            this.vd = vd;
+            this.node = node;
+        }
+    }
