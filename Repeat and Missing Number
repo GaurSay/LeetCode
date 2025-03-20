@@ -13,7 +13,7 @@ public class Solution {
     }
     long sum = squareDiff/diff;
     
-    long repeated = (diff+sum)/2;
+    long repeated =(sum+diff)/2;
     long missing = (sum-diff)/2;
     ArrayList<Integer> res = new ArrayList<Integer>();
     res.add( (int)repeated );
